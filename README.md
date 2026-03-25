@@ -30,7 +30,7 @@ Select count(*) from TitanicDataset;
 In Titanic Dataset we have 891 passengers.
 
 ---
-### How many passenger survived and din't survived in Titanic.
+### How many passenger survived and didn't survived in Titanic.
 
 ```
 code:

@@ -20,18 +20,48 @@ Data Quality Note: Missing values were identified in the Age and Cabin columns. 
 ---
 
 
-### Age
+### How many passenger have in Titanic
 
-By observing the graph, we can see only a slight difference between the two datasets. However, both show a strong concentration of customers in the 26–35 age group.
+```
+code:
+Select count(*) from TitanicDataset;
+```
+
+In Titanic Dataset we have 891 passengers.
+
+---
+### How many passenger survived and din't survived in Titanic.
+
+```
+code:
+SELECT survived, COUNT(*) as total
+FROM TitanicDataset
+GROUP BY survived;
+```
+
+In Titanic we have two numbers 0 and 1. 0 din't survivced and 1 survived. In this case 549 din't survived and 342 survived.
+
 <table>
   <tr>
     <td align="center">
       <a href="#" title="Age">
-        <img src="1.png" width="1000" alt="Comparing age between Test and train"/><br>
+        <img src="1.png" width="1000" alt="Titanic Survived"/><br>
       </a>
     </td>
   </tr>
 </table>
+
+---
+
+Qual é a porcentagem de sobreviventes no total?
+Quantos homens e quantas mulheres existem?
+Quantas pessoas embarcaram em cada porto (embarked)?
+🟡 Nível Básico + (já começa a diferenciar)
+Qual a quantidade de sobreviventes por gênero?
+Qual a taxa de sobrevivência por gênero (%)?
+Quantos passageiros existem por classe (pclass)?
+Qual a taxa de sobrevivência por classe (%)?
+Qual a média de idade dos passageiros?
 
 
 ### Adjustments and improvements.

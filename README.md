@@ -106,8 +106,23 @@ NULL: 2 passengers (missing data)
 
 ---
 
+### How many survived by gender?
+```
+SELECT 
+    sex,
+    survived,
+    COUNT(*) AS total,
+        ROUND(
+        COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(),
+        2
+    ) AS porcentagem
+FROM TitanicDataset
+GROUP BY sex, survived
+ORDER BY sex, survived;
+```
+Approximately 342 survived
+---
 
-🟡 Nível Básico + (já começa a diferenciar)
 Qual a quantidade de sobreviventes por gênero?
 Qual a taxa de sobrevivência por gênero (%)?
 Quantos passageiros existem por classe (pclass)?

@@ -20,26 +20,29 @@ Data Quality Note: Missing values were identified in the Age and Cabin columns. 
 ---
 
 
-### How many passenger have in Titanic
+### How many passengers are in the Titanic dataset?
 
 ```
-code:
 Select count(*) from TitanicDataset;
 ```
 
-In Titanic Dataset we have 891 passengers.
+The Titanic dataset contains 891 passengers.
 
 ---
-### How many passenger survived and didn't survived in Titanic.
+### How many passengers survived and did not survive?
 
 ```
-code:
 SELECT survived, COUNT(*) as total
 FROM TitanicDataset
 GROUP BY survived;
 ```
 
-In Titanic we have two numbers 0 and 1. 0 din't survivced and 1 survived. In this case 549 din't survived and 342 survived.
+In this dataset:
+
+0 = did not survive
+1 = survived
+
+A total of 549 passengers did not survive, while 342 survived.
 
 <table>
   <tr>
@@ -53,9 +56,57 @@ In Titanic we have two numbers 0 and 1. 0 din't survivced and 1 survived. In thi
 
 ---
 
-Qual é a porcentagem de sobreviventes no total?
-Quantos homens e quantas mulheres existem?
-Quantas pessoas embarcaram em cada porto (embarked)?
+###  What is the percentage of survivors?
+
+```
+SELECT 
+    survived,
+    COUNT(*) AS total,
+    ROUND(
+        COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(),
+        2
+    ) AS porcentagem
+FROM TitanicDataset
+GROUP BY survived;
+
+
+```
+38.62% survived
+61.38% did not survive
+
+----
+
+### How many men and women were on the Titanic?
+```
+SELECT sex, COUNT(*) as total
+FROM TitanicDataset
+GROUP BY sex
+
+
+```
+Approximately 64.76% of the passengers were male.
+---
+
+### How many passengers embarked at each port?
+```
+select embarked, COUNT(*) 
+from TitanicDataset
+as total
+group by embarked;
+C 168 (France) Rich 
+Q  77 (Newzeland) poor
+S 644 (England) General
+nULL 2
+
+```
+C (Cherbourg, France): 168 passengers
+Q (Queenstown, Ireland): 77 passengers
+S (Southampton, England): 644 passengers
+NULL: 2 passengers (missing data)
+
+---
+
+
 🟡 Nível Básico + (já começa a diferenciar)
 Qual a quantidade de sobreviventes por gênero?
 Qual a taxa de sobrevivência por gênero (%)?

@@ -108,8 +108,38 @@ NULL: 2 passengers (missing data)
 
 ### How many survived by gender?
 ```
+
 SELECT 
     sex,
+    survived,
+    COUNT(*) AS total,
+    ROUND(
+        COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(PARTITION BY sex),
+        2
+    ) AS percentage
+FROM TitanicDataset
+GROUP BY sex, survived
+ORDER BY sex, survived;
+```
+Survival rates differ significantly by gender. 
+Approximately 74% of females survived, while only about 19% of males survived.
+
+
+---
+### how many passenger by class
+```
+select pclass, count(*) as  total 
+from TitanicDataset
+group by pclass;
+```
+A total of 216 passengers were in 1st class, 
+184 in 2nd class, and 491 in 3rd class.
+
+---
+### how many passenger survived by class?
+```
+SELECT 
+    pclass,
     survived,
     COUNT(*) AS total,
         ROUND(
@@ -117,17 +147,48 @@ SELECT
         2
     ) AS porcentagem
 FROM TitanicDataset
-GROUP BY sex, survived
-ORDER BY sex, survived;
+GROUP BY pclass, survived
+ORDER BY pclass, survived;
+
 ```
-Approximately 342 survived
+A total of 136 passengers survived in 1st class, 
+87 in 2nd class, and 119 in 3rd class.
+
 ---
 
-Qual a quantidade de sobreviventes por gênero?
-Qual a taxa de sobrevivência por gênero (%)?
-Quantos passageiros existem por classe (pclass)?
-Qual a taxa de sobrevivência por classe (%)?
-Qual a média de idade dos passageiros?
+### how the percenge by class(%)
+```
+SELECT 
+    pclass,
+    survived,
+    COUNT(*) AS total,
+    ROUND(
+        COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(PARTITION BY pclass),
+        2
+    ) AS survival_rate
+FROM TitanicDataset
+GROUP BY pclass, survived
+ORDER BY pclass, survived;
+```
+Survival rates vary significantly by class. 
+Passengers in 1st class had the highest survival rate (~63%), 
+followed by 2nd class (~47%), while 3rd class had the lowest (~24%). 
+This suggests that socioeconomic status played an important role in survival.
+
+---
+ ### What is the average age of passengers?
+
+```
+SELECT 
+    round(AVG(age)) AS mean,
+    MAX(age) AS max_age,
+    MIN(age) AS min_age
+FROM TitanicDataset;
+```
+---
+
+Overview: The analysis shows that survival was strongly influenced by gender and class. 
+Women and first-class passengers had significantly higher survival rates, suggesting that social status and evacuation priorities played a key role.
 
 
 ### Adjustments and improvements.
